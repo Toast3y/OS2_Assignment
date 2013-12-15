@@ -46,12 +46,13 @@ def call(argv):
       if '*' in argument:
         #Implementation of file globbing
         #Simply replaces arguments using pythons glob scripts
-        #Deletes the argument with the wild card after, so it'll probably fetch the first thing it finds
-        argv.extend(glob.glob(argument))
+        #Deletes the argument with the wild card after, so it'll just fetch the first thing it finds
+        argv.insert(argv.index(argument), glob.glob(argument))
         argv.remove(argument)
       elif '>' in argument:
         #Output Redirection into files
         fd = os.open(argv[(argv.index(argument))+1], os.O_CREAT | os.O_TRUNC | os.O_RDWR)
+		#Pop the arguments off, so it only processes the command to write to output
         argv.pop((argv.index(argument))+1)
         argv.pop(argv.index(argument))
         os.dup2(fd, 1)
