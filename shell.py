@@ -42,7 +42,7 @@ def call(argv):
     cmd = argv[0]
 	
 	
-	for argument in argv:
+    for argument in argv:
 	  if '*' in argument:
 	    #Implementation of file globbing
 	    #Simply replaces arguments using pythons glob scripts
