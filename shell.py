@@ -52,7 +52,7 @@ def call(argv):
       elif '>' in argument:
         #Output Redirection into files
         fd = os.open(argv[(argv.index(argument))+1], os.O_CREAT | os.O_TRUNC | os.O_RDWR)
-        argv.pop(argv.index(argument+1))
+        argv.pop((argv.index(argument))+1)
         argv.pop(argv.index(argument))
         os.dup2(fd, 1)
       elif '<' in argument:
