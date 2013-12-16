@@ -51,14 +51,14 @@ def call(argv):
         argv.remove(argument)
       elif '>' in argument:
         #Output Redirection into files
-        fd = os.open(argv[(argv.index(argument))+1], os.O_CREAT | os.O_TRUNC | os.O_RDWR)
+        filestream = os.open(argv[(argv.index(argument))+1], os.O_CREAT | os.O_TRUNC | os.O_RDWR)
         argv.pop((argv.index(argument))+1)
         argv.pop(argv.index(argument))
-        os.dup2(fd, 1)
+        os.dup2(filestream, 1)
       elif '<' in argument:
         #Input Redirection into files
-        fd = os.open(argv[(argv.index(argument))+1], os.O_RDONLY)
-        os.dup2(fd, 0)
+        filestream = os.open(argv[(argv.index(argument))+1], os.O_RDONLY)
+        os.dup2(filestream, 0)
 	
     if '/' in cmd:
       # Relative or absolute path specified
