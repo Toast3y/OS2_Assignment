@@ -52,11 +52,12 @@ def call(argv):
       elif '>' in argument:
         #Output Redirection into files
         filestream = os.open(argv[(argv.index(argument))+1], os.O_CREAT | os.O_TRUNC | os.O_RDWR)
+		#Remove the redirection arguments so the shell doesn't try to parse it again
         argv.pop((argv.index(argument))+1)
         argv.pop(argv.index(argument))
         os.dup2(filestream, 1)
       elif '<' in argument:
-        #Input Redirection into files
+        #Input Redirection from files
         filestream = os.open(argv[(argv.index(argument))+1], os.O_RDONLY)
         os.dup2(filestream, 0)
 	
