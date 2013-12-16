@@ -55,10 +55,12 @@ def call(argv):
 		#Remove the redirection arguments so the shell doesn't try to parse it again
         argv.pop((argv.index(argument))+1)
         argv.pop(argv.index(argument))
+		#Tells the shell to write into the filestream instead of stdout
         os.dup2(filestream, 1)
       elif '<' in argument:
         #Input Redirection from files
         filestream = os.open(argv[(argv.index(argument))+1], os.O_RDONLY)
+		#Tells the stream to read from the filestream instead
         os.dup2(filestream, 0)
 	
     if '/' in cmd:
